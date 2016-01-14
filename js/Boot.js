@@ -6,6 +6,7 @@ DesireDesk.Boot.prototype = {
     preload: function () {
         this.load.image('preloaderBar', 'assets/images/loader.gif');
         this.load.image('bg', 'assets/images/bg.jpg');
+        this.load.image('menu', 'assets/images/menu.png');
         this.load.bitmapFont('eightbitwonder', 'assets/fonts/eightbitwonder.png', 'assets/fonts/eightbitwonder.fnt');
     },
 
