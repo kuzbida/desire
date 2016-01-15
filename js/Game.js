@@ -1,5 +1,7 @@
 DesireDesk.Game = function (game) {
     this.leftImage;
+    this.rightImage;
+    this.imageSetNum = 1;
 };
 
 DesireDesk.Game.prototype = {
@@ -20,13 +22,26 @@ DesireDesk.Game.prototype = {
     },
 
     create: function () {
+        this.textBelow = this.add.text(this.world.centerX - 100, this.world.height - 100, 'Make Your Choise', {fill: '#fff'});
+        this.titleText = this.add.text(this.world.centerX - 100, 30, 'Board of Dream', {fill: '#fff', size: 50});
 
-        this.leftImage = this.add.image(100, 200, 'image1');
+
+    },
+
+    update: function () {
+        this.leftImage = this.add.image(100, 200, 'image' + this.imageSetNum);
         this.leftImage.width = this.world.width / 3;
         this.leftImage.height = this.world.height / 3;
+        this.leftImage.inputEnabled = true;
+        this.leftImage.events.onInputDown.add(this.chooseImg, this);
 
-        this.rightImage = this.add.image(this.world.centerX + 100, 200, 'image2');
+        this.rightImage = this.add.image(this.world.centerX + 100, 200, 'image' + (this.imageSetNum+1));
         this.rightImage.width = this.world.width / 3;
         this.rightImage.height = this.world.height / 3;
+    },
+
+    chooseImg: function (text, pointer) {
+        this.imageSetNum++;
+      console.log(text.key);
     }
 };
