@@ -9,6 +9,7 @@
     <script src="js/Boot.js"></script>
     <script src="js/Preloader.js"></script>
     <script src="js/StartMenu.js"></script>
+    <script src="js/Game.js"></script>
     <style>
         body{
             padding: 0;
@@ -25,11 +26,13 @@
 <div id="gameContainer"></div>
 
 <script type="text/javascript">
+    var game = new Phaser.Game(960, 640, Phaser.AUTO, 'gameContainer');
+    var stateService = game.state;
     window.onload = function(){
-        var game = new Phaser.Game(960, 640, Phaser.AUTO, 'gameContainer');
         game.state.add('Boot', DesireDesk.Boot);
         game.state.add('Preloader', DesireDesk.Preloader);
         game.state.add('StartMenu', DesireDesk.StartMenu);
+        game.state.add('Game', DesireDesk.Game);
         game.state.start('Boot');
     }
 </script>

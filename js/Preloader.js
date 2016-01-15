@@ -12,10 +12,6 @@ DesireDesk.Preloader.prototype = {
   },
 
   create: function () {
-    this.preloadBar.cropEnabled = false;
-  },
-
-  update: function () {
     this.ready = true;
     this.state.start('StartMenu');
   }
