@@ -10,6 +10,7 @@
     <script src="js/Preloader.js"></script>
     <script src="js/StartMenu.js"></script>
     <script src="js/Game.js"></script>
+    <script src="js/Result.js"></script>
     <style>
         body{
             padding: 0;
@@ -33,6 +34,7 @@
         game.state.add('Preloader', DesireDesk.Preloader);
         game.state.add('StartMenu', DesireDesk.StartMenu);
         game.state.add('Game', DesireDesk.Game);
+        game.state.add('Result', DesireDesk.Result);
         game.state.start('Boot');
     }
 </script>
