@@ -56,11 +56,12 @@ DesireDesk.Game.prototype = {
 
     chooseImg: function (text, pointer) {
         this.checkedImages[this.step+'_step'] = text.key;
-        console.log(this.checkedImages);
+        if(this.step === 4) {
+            this.state.start('Result', true, false, this.checkedImages);
+            return;
+        }
         this.step++;
         this.imageSetNum = this.step + 1;
-        if(this.step === 5) {
-            this.state.start('Result', true, false, this.checkedImages);
-        }
+
     }
 };
