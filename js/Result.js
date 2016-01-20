@@ -10,7 +10,6 @@ DesireDesk.Result = function(){
 DesireDesk.Result.prototype = {
     init: function(checkedImages) {
         this.checkedImages = checkedImages;
-        console.log(checkedImages)
     },
 
     create: function () {
@@ -54,6 +53,11 @@ DesireDesk.Result.prototype = {
         menuWhy.inputEnabled = true;
         menuWhy.events.onInputDown.add(this.goTo, {stateToGo: 'Why'});
         this.menuGroup.add(menuWhy);
+
+
+        this.resultGroup = this.add.group();
+        this.resultGroup.enableBody = true;
+        this.resultGroup.z = 1;
 
     },
 
