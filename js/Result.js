@@ -9,72 +9,42 @@ DesireDesk.Result = function(){
 
 DesireDesk.Result.prototype = {
     init: function(checkedImages) {
-        this.checkedImages = checkedImages;
+        //TODO: investigate how to get images' src
+        //this.checkedImages = checkedImages;
+
+    },
+
+    preload: function () {
+        this.userImages = [
+            {name: 'image1', src: 'assets/images/test/1.jpg'},
+            {name: 'image2', src: 'assets/images/test/2.jpg'},
+            {name: 'image3', src: 'assets/images/test/3.jpg'},
+            {name: 'image4', src: 'assets/images/test/4.jpg'},
+            {name: 'image5', src: 'assets/images/test/5.jpg'},
+            {name: 'image6', src: 'assets/images/test/6.jpg'},
+            {name: 'image7', src: 'assets/images/test/7.jpg'},
+            {name: 'image8', src: 'assets/images/test/8.jpg'}
+        ];
+        //preloading images set
+        for(var i = 0; i < this.userImages.length; i++){
+            this.load.image(this.userImages[i].name, this.userImages[i].src);
+        }
     },
 
     create: function () {
         this.startBG = this.add.image(0, 0, 'bg');
         this.startBG.width = this.world.width;
         this.startBG.height = this.world.height;
-
         this.titleText = this.add.bitmapText(this.world.centerX - 120, 30, 'eightbitwonder', 'Your result', 24);
 
-
-        //*****menu btn*****
-        var menuButton = this.add.button(this.world._width - 50, 50, "menu", this.toggleMenu, this);
-        menuButton.anchor.set(0.5);
-        menuButton.width = 70;
-        menuButton.height = 70;
-
         //*****menu list*****
-        this.menuGroup = this.add.group();
-        this.menuGroup.enableBody = true;
-        this.menuGroup.stage.backgroundColor = '#171642';
-        this.menuGroup.stage.width = 200;
-        this.menuGroup.stage.height = this.world._height;
-        this.menuGroup.z = 1;
-
-        var menuHelp = this.add.text(this.world._width + 100, 200, 'Help', { font: "32px Arial", fill: '#3F51B5'});
-        menuHelp.inputEnabled = true;
-        menuHelp.events.onInputDown.add(this.goTo, {stateToGo: 'Help'});
-        this.menuGroup.add(menuHelp);
-
-        var menuFriends = this.add.text(this.world._width + 100, 250, 'Friends', { font: "32px Arial", fill: '#3F51B5'});
-        menuFriends.inputEnabled = true;
-        menuFriends.events.onInputDown.add(this.goTo, {stateToGo: 'Friends'});
-        this.menuGroup.add(menuFriends);
-
-        var menuSupport = this.add.text(this.world._width + 100, 350, 'Support', { font: "32px Arial", fill: '#3F51B5'});
-        menuSupport.inputEnabled = true;
-        menuSupport.events.onInputDown.add(this.goTo, {stateToGo: 'Support'});
-        this.menuGroup.add(menuSupport);
-
-        var menuWhy = this.add.text(this.world._width + 100, 400, 'Why', { font: "32px Arial", fill: '#3F51B5'});
-        menuWhy.inputEnabled = true;
-        menuWhy.events.onInputDown.add(this.goTo, {stateToGo: 'Why'});
-        this.menuGroup.add(menuWhy);
+        InitMenu(this);
 
 
         this.resultGroup = this.add.group();
         this.resultGroup.enableBody = true;
         this.resultGroup.z = 1;
 
-    },
-
-    toggleMenu: function () {
-        if(this.menuGroup.x == 0){
-            var menuTween = this.add.tween(this.menuGroup).to({
-                x: -250
-            }, 500, Phaser.Easing.Bounce.Out, true);
-        }
-        if(this.menuGroup.x == -250){
-            var menuTween = this.add.tween(this.menuGroup).to({
-                x: 0
-            }, 500, Phaser.Easing.Bounce.Out, true);
-        }
-    },
-
-    goTo: function () {
-        stateService.start(this.stateToGo);
     }
+
 };

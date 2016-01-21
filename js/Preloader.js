@@ -8,7 +8,6 @@ DesireDesk.Preloader.prototype = {
     this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
     this.preloadBar.anchor.setTo(0.5,0.5);
     this.load.setPreloadSprite(this.preloadBar);
-
   },
 
   create: function () {
