@@ -1,8 +1,7 @@
 DesireDesk.Result = function(){
     this.startBG;
     this.titleText;
-    this.menuGroup;
-    this.checkedImages;
+    this.result = [];
 
     var _this = this;
 };
@@ -25,9 +24,13 @@ DesireDesk.Result.prototype = {
             {name: 'image7', src: 'assets/images/test/7.jpg'},
             {name: 'image8', src: 'assets/images/test/8.jpg'}
         ];
+        /*this.resultGroup = this.add.group();
+        this.resultGroup.enableBody = true;
+        this.resultGroup.z = 1;*/
         //preloading images set
         for(var i = 0; i < this.userImages.length; i++){
             this.load.image(this.userImages[i].name, this.userImages[i].src);
+            this.result.push(this.userImages[i].name);
         }
     },
 
@@ -41,9 +44,14 @@ DesireDesk.Result.prototype = {
         InitMenu(this);
 
 
-        this.resultGroup = this.add.group();
-        this.resultGroup.enableBody = true;
-        this.resultGroup.z = 1;
+        for(var i = 0; i < this.result.length; i++){
+            var x = i < 4 ? 200*i + 100 : 200*(i-4) + 100 ,
+                y = i < 4 ? 200 : 400;
+            var name = 'result_'+ this.result[i];
+            this[name] = this.add.image(x, y, this.result[i]);
+            this[name].width = 150;
+            this[name].height = 150;
+        }
 
     }
 
