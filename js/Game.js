@@ -14,6 +14,7 @@ DesireDesk.Game = function (game) {
         {name: 'image7', src: 'assets/images/test/7.jpg'},
         {name: 'image8', src: 'assets/images/test/8.jpg'}
     ];
+    var anim;
 };
 
 DesireDesk.Game.prototype = {
@@ -36,22 +37,11 @@ DesireDesk.Game.prototype = {
         this.preloadBar.destroy();
         this.textBelow = this.add.text(this.world.centerX - 100, this.world.height - 100, 'Make Your Choise', {fill: '#fff'});
         this.titleText = this.add.text(this.world.centerX - 100, 30, 'Board of Dream', {fill: '#fff', size: 50});
-
-
+        this.initImages();
     },
 
     update: function () {
-        this.leftImage = this.add.image(100, 200, 'image' + this.imageSetNum);
-        this.leftImage.width = this.world.width / 3;
-        this.leftImage.height = this.world.height / 3;
-        this.leftImage.inputEnabled = true;
-        this.leftImage.events.onInputDown.add(this.chooseImg, this);
 
-        this.rightImage = this.add.image(this.world.centerX + 100, 200, 'image' + (this.imageSetNum+1));
-        this.rightImage.width = this.world.width / 3;
-        this.rightImage.height = this.world.height / 3;
-        this.rightImage.inputEnabled = true;
-        this.rightImage.events.onInputDown.add(this.chooseImg, this);
     },
 
     chooseImg: function (text, pointer) {
@@ -62,6 +52,28 @@ DesireDesk.Game.prototype = {
         }
         this.step++;
         this.imageSetNum = this.step + 1;
+        this.initImages();
+    },
 
+    initImages: function() {
+        this.leftImage = this.add.image(100, 200, 'image' + this.imageSetNum);
+        this.leftImage.width = this.world.width / 3;
+        this.leftImage.height = this.world.height / 3;
+        this.leftImage.inputEnabled = true;
+        this.leftImage.events.onInputDown.add(this.chooseImg, this);
+
+        anim = this.leftImage.animations.add('walk');
+
+        /*anim.onStart.add(animationStarted, this);
+         anim.onLoop.add(animationLooped, this);
+         anim.onComplete.add(animationStopped, this);*/
+
+        anim.play(10, true);
+
+        this.rightImage = this.add.image(this.world.centerX + 100, 200, 'image' + (this.imageSetNum+1));
+        this.rightImage.width = this.world.width / 3;
+        this.rightImage.height = this.world.height / 3;
+        this.rightImage.inputEnabled = true;
+        this.rightImage.events.onInputDown.add(this.chooseImg, this);
     }
 };
