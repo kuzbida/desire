@@ -4,6 +4,7 @@ DesireDesk.Game = function (game) {
     this.imageSetNum = 1;
     this.step = 1;
     this.checkedImages = {};
+
     this.newImages = [
         {name: 'image1', src: 'assets/images/test/1.jpg'},
         {name: 'image2', src: 'assets/images/test/2.jpg'},
@@ -14,8 +15,8 @@ DesireDesk.Game = function (game) {
         {name: 'image7', src: 'assets/images/test/7.jpg'},
         {name: 'image8', src: 'assets/images/test/8.jpg'}
     ];
-    var anim;
 };
+var rotationActive = false;
 
 DesireDesk.Game.prototype = {
     preload: function () {
@@ -41,7 +42,16 @@ DesireDesk.Game.prototype = {
     },
 
     update: function () {
-
+        if(rotationActive){
+            this.leftImage.y += 5;
+            if(this.leftImage.y > (this.world.height-300)){
+                this.leftImage.y = 100;
+            }
+            this.rightImage.y += 5;
+            if(this.rightImage.y > (this.world.height-300)){
+                this.rightImage.y = 100;
+            }
+        }
     },
 
     chooseImg: function (text, pointer) {
@@ -56,24 +66,21 @@ DesireDesk.Game.prototype = {
     },
 
     initImages: function() {
+        rotationActive = true;
         this.leftImage = this.add.image(100, 200, 'image' + this.imageSetNum);
         this.leftImage.width = this.world.width / 3;
         this.leftImage.height = this.world.height / 3;
         this.leftImage.inputEnabled = true;
         this.leftImage.events.onInputDown.add(this.chooseImg, this);
 
-        anim = this.leftImage.animations.add('walk');
-
-        /*anim.onStart.add(animationStarted, this);
-         anim.onLoop.add(animationLooped, this);
-         anim.onComplete.add(animationStopped, this);*/
-
-        anim.play(10, true);
-
         this.rightImage = this.add.image(this.world.centerX + 100, 200, 'image' + (this.imageSetNum+1));
         this.rightImage.width = this.world.width / 3;
         this.rightImage.height = this.world.height / 3;
         this.rightImage.inputEnabled = true;
         this.rightImage.events.onInputDown.add(this.chooseImg, this);
+
+        setTimeout(function(){
+            rotationActive = false;
+        }, 1000)
     }
 };
